@@ -12,7 +12,8 @@
                             <p>{{ $post->body }}</p>
                             {{-- postsテーブル->usersテーブル->users.name --}}
                             <p>投稿者：{{ $post->user->name }}</p>
-                            <p>いいね：1</p>
+                            {{-- postsテーブル->likesテーブルの1番目->likes.like --}}
+                            <p>いいね：{{ $post->likes[0]->like }}</p>
                             <span style="margin-right: 8px">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-heart" viewBox="0 0 16 16">
