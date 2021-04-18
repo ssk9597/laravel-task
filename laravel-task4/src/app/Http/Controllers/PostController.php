@@ -37,6 +37,8 @@ class PostController extends Controller
     $post->fill($request->all())->save();
     $like->fill($request->all())->save();
 
+    // 中間テーブル
+    $post->likes()->attach($like->id);
     return redirect("posts");
   }
 
