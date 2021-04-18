@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Like extends Model
 {
+  //fillable
+  protected $fillable = ["like", "likecheck"];
+
   // 多対多のリレーション（Posts->親, Likes->親）
   public function posts()
   {

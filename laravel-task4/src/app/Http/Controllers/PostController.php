@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 // Model
 use App\Models\User;
 use App\Models\Post;
+use App\Models\Like;
 
 // Validation
 use App\Http\Requests\StorePost;

@@ -17,3 +17,5 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::group(["middleware" => "auth"], function () {
   Route::resource("posts", "PostController", ["only" => ["index", "create", "store", "edit", "update", "destroy"]]);
 });
+
+Route::resource("likes", "LikeController", ["only" => ["update"]]);
