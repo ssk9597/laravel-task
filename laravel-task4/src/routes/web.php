@@ -14,4 +14,6 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::resource("posts", "PostController", ["only" => ["index", "create", "store", "edit", "update", "destroy"]]);
+Route::group(["middleware" => "auth"], function () {
+  Route::resource("posts", "PostController", ["only" => ["index", "create", "store", "edit", "update", "destroy"]]);
+});
