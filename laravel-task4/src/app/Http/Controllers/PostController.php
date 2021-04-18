@@ -31,9 +31,11 @@ class PostController extends Controller
   {
     // Modelを呼び出す
     $post = new Post;
+    $like = new Like;
 
     // 保存（fillable→"title", "body", "user_id"）
     $post->fill($request->all())->save();
+    $like->fill($request->all())->save();
 
     return redirect("posts");
   }
