@@ -19,6 +19,10 @@ class CreatePostsLikesTable extends Migration
 
       //プライマリーキー制約
       $table->primary(["post_id", "like_id"]);
+
+      // 外部キー制約
+      $table->foreign("post_id")->references("id")->on("posts");
+      $table->foreign("like_id")->references("id")->on("likes");
     });
   }
 
