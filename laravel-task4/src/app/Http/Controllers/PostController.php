@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 // Model
 use App\Models\User;
 use App\Models\Post;
-use App\Models\Like;
 
 // Validation
 use App\Http\Requests\StorePost;
@@ -31,14 +30,10 @@ class PostController extends Controller
   {
     // Modelを呼び出す
     $post = new Post;
-    $like = new Like;
 
     // 保存（fillable→"title", "body", "user_id"）
     $post->fill($request->all())->save();
-    $like->fill($request->all())->save();
 
-    // 中間テーブル
-    $post->likes()->attach($like->id);
     return redirect("posts");
   }
 

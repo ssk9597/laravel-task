@@ -6,15 +6,14 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+// Models
+use App\Models\Post;
+
 class User extends Authenticatable
 {
   use Notifiable;
 
-  /**
-   * The attributes that are mass assignable.
-   *
-   * @var array
-   */
+  // fillable
   protected $fillable = [
     'name', 'email', 'password',
   ];
@@ -41,5 +40,11 @@ class User extends Authenticatable
   public function posts()
   {
     return $this->hasMany("App\Models\Post");
+  }
+
+  // 多対多のリレーション（Users->親, Posts->親, いいね数）
+  public function likes()
+  {
+    return $this->belongsToMany(Post::class)->withTimestamps();
   }
 }

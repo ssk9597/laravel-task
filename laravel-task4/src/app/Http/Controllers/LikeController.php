@@ -7,25 +7,25 @@ use Illuminate\Http\Request;
 // Model
 use App\Models\User;
 use App\Models\Post;
-use App\Models\Like;
+
+// Auth
+use Auth;
 
 class LikeController extends Controller
 {
   public function update(Request $request, $id)
   {
-    // これがいいねされているかされていないかを判断（whiteは白塗りのためされていない、blackは黒塗りのためされている）
-    $fill = $request->input("fill");
+    $post = Post::find($id);
+    $post->likes()->attach(Auth::id());
 
-    // 選択された値を取得
-    $like = Like::find($id);
+    return redirect("posts");
+  }
 
-    if ($fill === "white") {
-      // 白塗りの場合いいねを1追加、likecheckを1にしてviewの方は黒塗りが表示されるようにする
-      $like->fill(["like" => $like->like + 1, "likecheck" => 1])->save();
-    } else {
-      // 黒塗りの場合いいねを1減少、likecheckを0にしてviewの方は白塗りが表示されるようにする
-      $like->fill(["like" => $like->like - 1, "likecheck" => 0])->save();
-    }
+  public function destroy(Request $request, $id)
+  {
+    $post = Post::find($id);
+    $post->likes()->detach(Auth::id());
+
     return redirect("posts");
   }
 }
