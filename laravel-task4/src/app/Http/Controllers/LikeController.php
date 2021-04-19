@@ -16,7 +16,9 @@ class LikeController extends Controller
   public function update(Request $request, $id)
   {
     $post = Post::find($id);
-    $post->likes()->attach(Auth::id());
+    if ($post->likes()->count() <= User::all()->count()) {
+      $post->likes()->attach(Auth::id());
+    }
 
     return redirect("posts");
   }
@@ -24,7 +26,9 @@ class LikeController extends Controller
   public function destroy(Request $request, $id)
   {
     $post = Post::find($id);
-    $post->likes()->detach(Auth::id());
+    if ($post->likes()->count() >= 0) {
+      $post->likes()->detach(Auth::id());
+    }
 
     return redirect("posts");
   }

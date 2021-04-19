@@ -26,9 +26,6 @@ class PostUserTable extends Migration
       // 外部キー制約
       $table->foreign("post_id")->references("id")->on("posts")->onDelete("cascade");
       $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade");
-
-      // ユニーク
-      $table->unique(["post_id", "user_id"]);
     });
   }
 
